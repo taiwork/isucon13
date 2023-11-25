@@ -1,0 +1,32 @@
+name: ボトルネックレポート
+description: ボトルネックレポート
+title: "[bottleneck]: "
+labels: ["bottleneck"]
+body:
+  - type: input
+    id: api-endpoint
+    attributes:
+      label: APIエンドポイント
+      placeholder: ex) get '/api/v1/users'
+    validations:
+      required: false
+  - type: textarea
+    id: neck-code
+    attributes:
+      label: ボトルネックのコード
+      description: ボトルネックのコードを貼り付けてください（githubのpermalinkを貼ると良い）
+    validations:
+      required: false
+  - type: textarea
+    id: why-neck
+    attributes:
+      label: 根拠
+      description: なぜボトルネックなのかを書いてください（mysqldumpslowの結果など）
+    validations:
+      required: false
+  - type: markdown
+    id: select-label
+    attributes:
+      value: |
+        - 右のLabelsから適切なラベルをつけてください
+        - ex) `N+1`, `INDEX`, etc
