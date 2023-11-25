@@ -13,7 +13,7 @@ SERVER3=isucon@54.250.164.198
 
 # alp
 ALPSORT=sum
-ALPM="/api/user/.+/icon,/api/user/.+/theme,/api/user/.+/statistics,/api/livestream/\d+/livecomment,/api/livestream/\d+/ngwords,/api/livestream/\d+/exit,/api/livestream/\d+/enter,/api/livestream/\d+/livecomment/\d+/report,/api/livestream/\d+/reaction,/api/livestream/search?tag=.+"
+ALPM="/api/user/.+/icon,/api/user/.+/theme,/api/user/.+/statistics,/api/livestream/.+/statistics,/api/livestream/\d+/livecomment,/api/livestream/\d+/moderate,/api/livestream/\d+/ngwords,/api/livestream/\d+/exit,/api/livestream/\d+/enter,/api/livestream/\d+/livecomment/\d+/report,/api/livestream/\d+/report,/api/livestream/\d+/reaction,/api/livestream/search?tag=.*"
 OUTFORMAT=count,method,uri,min,max,sum,avg,p99
 
 NOW:=$(shell date "+%Y-%m-%d-%H:%M:%S")
