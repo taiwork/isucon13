@@ -38,8 +38,6 @@ CREATE TABLE `livestreams` (
   `end_at` BIGINT NOT NULL
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
-ALTER TABLE `livestreams` ADD INDEX `idx_user_id_on_livestreams` (`user_id`);
-
 -- ライブ配信予約枠
 CREATE TABLE `reservation_slots` (
   `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -81,8 +79,6 @@ CREATE TABLE `livecomments` (
   `tip` BIGINT NOT NULL DEFAULT 0,
   `created_at` BIGINT NOT NULL
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
-
-ALTER TABLE `livecomments` ADD INDEX `idx_livestream_id_on_livecomments` (`livestream_id`);
 
 -- ユーザからのライブコメントのスパム報告
 CREATE TABLE `livecomment_reports` (
