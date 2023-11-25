@@ -1,0 +1,48 @@
+Count: 18001  Time=0.00s (59s)  Lock=0.00s (0s)  Rows=0.1 (1664), isudns[isudns]@localhost
+  SELECT content,ttl,prio,type,domain_id,disabled,name,auth FROM records WHERE disabled=N and name='S' and domain_id=N
+
+Count: 12477  Time=0.00s (38s)  Lock=0.00s (0s)  Rows=0.5 (6259), isudns[isudns]@localhost
+  SELECT content,ttl,prio,type,domain_id,disabled,name,auth FROM records WHERE disabled=N and type='S' and name='S'
+
+Count: 22652  Time=0.00s (9s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  select kind,content from domains, domainmetadata where domainmetadata.domain_id=domains.id and name='S'
+
+Count: 55659  Time=0.00s (8s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  #
+
+Count: 180  Time=0.01s (1s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  commit
+
+Count: 179  Time=0.01s (1s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  delete from records where domain_id=N and name='S' and type='S'
+
+Count: 358  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.5 (179), isudns[isudns]@localhost
+  SELECT content,ttl,prio,type,domain_id,disabled,name,auth FROM records WHERE disabled=N and type='S' and name='S' and domain_id=N
+
+Count: 1459  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  insert into records (content,ttl,prio,type,domain_id,disabled,name,ordername,auth) values ('S',N,N,'S',N,N,'S',NULL,N)
+
+Count: 180  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (180), isudns[isudns]@localhost
+  select id,name,master,last_check,notified_serial,type,options,catalog,account from domains where name='S'
+
+Count: 364  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED
+
+Count: 180  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  begin
+
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  delete from records where domain_id=N
+
+Count: 53234  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Reset stmt
+
+Count: 260  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Quit
+
+Count: 1078  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Close stmt
+
+Count: 1087  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Prepare
+
