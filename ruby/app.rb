@@ -103,9 +103,11 @@ module Isupipe
       end
 
       def fill_livestream_response(tx, livestream_model)
+        # limit 1 でよさそう
         owner_model = tx.xquery('SELECT * FROM users WHERE id = ?', livestream_model.fetch(:user_id)).first
         owner = fill_user_response(tx, owner_model)
 
+        # N+1発生してそう
         tags = tx.xquery('SELECT * FROM livestream_tags WHERE livestream_id = ?', livestream_model.fetch(:id)).map do |livestream_tag_model|
           tag_model = tx.xquery('SELECT * FROM tags WHERE id = ?', livestream_tag_model.fetch(:tag_id)).first
           {
@@ -121,6 +123,7 @@ module Isupipe
       end
 
       def fill_livecomment_response(tx, livecomment_model)
+        # limit 1 でよさそう
         comment_owner_model = tx.xquery('SELECT * FROM users WHERE id = ?', livecomment_model.fetch(:user_id)).first
         comment_owner = fill_user_response(tx, comment_owner_model)
 
@@ -160,6 +163,7 @@ module Isupipe
       end
 
       def fill_user_response(tx, user_model)
+        # 何回も呼ばれている
         theme_model = tx.xquery('SELECT * FROM themes WHERE user_id = ?', user_model.fetch(:id)).first
 
         icon_model = tx.xquery('SELECT image FROM icons WHERE user_id = ?', user_model.fetch(:id)).first
@@ -169,6 +173,7 @@ module Isupipe
           else
             File.binread(FALLBACK_IMAGE)
           end
+        # これ計算に時間かかってる可能性あり計算を減らしてもいいかも
         icon_hash = Digest::SHA256.hexdigest(image)
 
         {
@@ -272,8 +277,11 @@ module Isupipe
 
         # 予約枠をみて、予約が可能か調べる
         # NOTE: 並列な予約のoverbooking防止にFOR UPDATEが必要
+        # start_atとend_atにINDEX貼りたいかも。複合INDEX
         tx.xquery('SELECT * FROM reservation_slots WHERE start_at >= ? AND end_at <= ? FOR UPDATE', req.start_at, req.end_at).each do |slot|
+          # N+1かも
           count = tx.xquery('SELECT slot FROM reservation_slots WHERE start_at = ? AND end_at = ?', slot.fetch(:start_at), slot.fetch(:end_at)).first.fetch(:slot)
+          # 最後に消す
           logger.info("#{slot.fetch(:start_at)} ~ #{slot.fetch(:end_at)}予約枠の残数 = #{slot.fetch(:slot)}")
           if count < 1
             raise HttpError.new(400, "予約期間 #{term_start_at.to_i} ~ #{term_end_at.to_i}に対して、予約区間 #{req.start_at} ~ #{req.end_at}が予約できません")
@@ -285,6 +293,7 @@ module Isupipe
         livestream_id = tx.last_id
 
 	# タグ追加
+        # バルクインサートにできる
         req.tags.each do |tag_id|
           tx.xquery('INSERT INTO livestream_tags (livestream_id, tag_id) VALUES (?, ?)', livestream_id, tag_id)
         end
