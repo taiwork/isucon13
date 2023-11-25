@@ -23,15 +23,18 @@ NOW:=$(shell date "+%Y-%m-%d-%H:%M:%S")
 # ====================================================
 .PHONY: deploy build build-server1 build-app build-nginx build-mysql
 deploy:
-	ssh $(SERVER1) 'cd $(APP_HOME) && make build'
-	ssh $(SERVER2) 'cd $(APP_HOME) && make build'
-	ssh $(SERVER3) 'cd $(APP_HOME) && make build'
+	ssh $(SERVER1) 'cd $(APP_HOME) && make build1'
+	ssh $(SERVER2) 'cd $(APP_HOME) && make build2'
+	ssh $(SERVER3) 'cd $(APP_HOME) && make build1'
 
-build:
-	cd $(APP_HOME) && git fetch -p && git checkout $(BRANCH) && git pull origin $(BRANCH) && make build-server
+build1:
+	cd $(APP_HOME) && git fetch -p && git checkout $(BRANCH) && git pull origin $(BRANCH) && make build-server1
+build2:
+	cd $(APP_HOME) && git fetch -p && git checkout $(BRANCH) && git pull origin $(BRANCH) && make build-server2
 
 # Set app, mysql and nginx.
-build-server: build-app build-nginx build-mysql
+build-server1: build-app build-nginx
+build-server2: build-mysql
 
 build-app:
 	cd $(APP_HOME) && \
@@ -94,6 +97,4 @@ push:
 	git add measure/ && git commit -m "log $(NOW)" && git push origin $(BRANCH)
 
 init_sql:
-	ssh $(SERVER1) 'mysql -h 127.0.0.1 -P 3306 -u isucon -pisucon -e "DROP DATABASE IF EXISTS isupipe; CREATE DATABASE isupipe;" && cat $(APP_HOME)/sql/initdb.d/10_schema.sql | sudo mysql isupipe'
 	ssh $(SERVER2) 'mysql -h 127.0.0.1 -P 3306 -u isucon -pisucon -e "DROP DATABASE IF EXISTS isupipe; CREATE DATABASE isupipe;" && cat $(APP_HOME)/sql/initdb.d/10_schema.sql | sudo mysql isupipe'
-	ssh $(SERVER3) 'mysql -h 127.0.0.1 -P 3306 -u isucon -pisucon -e "DROP DATABASE IF EXISTS isupipe; CREATE DATABASE isupipe;" && cat $(APP_HOME)/sql/initdb.d/10_schema.sql | sudo mysql isupipe'
