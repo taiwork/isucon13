@@ -528,7 +528,7 @@ module Isupipe
       req = decode_request_body(PostLivecommentRequest)
 
       livecomment = db_transaction do |tx|
-        livestream_model = tx.xquery('SELECT * FROM livestreams WHERE id = ?', livestream_id).first
+        livestream_model = tx.xquery('SELECT id, user_id FROM livestreams WHERE id = ? LIMIT 1', livestream_id).first
         unless livestream_model
           raise HttpError.new(404, 'livestream not found')
         end
