@@ -78,7 +78,6 @@ restart:
 
 alp:
 	cd $(APP_HOME) && \
-	# /home/linuxbrew/.linuxbrew/bin/alp ltsv --file=$(NGINX_LOG) --nosave-pos --pos /tmp/alp.pos --sort $(ALPSORT) --reverse -o $(OUTFORMAT) -m $(ALPM) -q > ./measure/alp/$(NOW).log
 	/home/linuxbrew/.linuxbrew/bin/alp ltsv --file=$(NGINX_LOG) --nosave-pos --pos /tmp/alp.pos --sort $(ALPSORT) --reverse -o $(OUTFORMAT) -q > ./measure/alp/$(NOW).log
 
 # mysql slow log
