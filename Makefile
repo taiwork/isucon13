@@ -54,9 +54,9 @@ build-mysql:
 # ====================================================
 .PHONY: measure lotate_log lotate_nginx_log lotate_mysql_log restart bench alp mysql_slow_log push
 measure:
-	ssh $(SERVER1) 'cd $(APP_HOME) && make alp mysql_slow_log push lotate_log restart'
-	ssh $(SERVER2) 'cd $(APP_HOME) && make alp mysql_slow_log push lotate_log restart'
-	ssh $(SERVER3) 'cd $(APP_HOME) && make alp mysql_slow_log push lotate_log restart'
+	ssh $(SERVER1) 'cd $(APP_HOME) && make alp mysql_slow_log lotate_log push restart'
+	ssh $(SERVER2) 'cd $(APP_HOME) && make alp mysql_slow_log lotate_log push restart'
+	ssh $(SERVER3) 'cd $(APP_HOME) && make alp mysql_slow_log lotate_log push restart'
 
 # log lotation
 # logファイルを変えたあとに、nginx, mysqlを再起動すること
@@ -88,7 +88,7 @@ alp:
 # -t 10 は上位10件を表示
 mysql_slow_log:
 	cd $(APP_HOME) && \
-	sudo mysqldumpslow -s t -t 10 /var/log/mysql/mysql-slow.log > ./measure/mysql/$(NOW).log
+	sudo mysqldumpslow -s t /var/log/mysql/mysql-slow.log > ./measure/mysql/$(NOW).log
 	# mysqldumpslow -s c -t 10 /var/log/mysql/mysql-slow.log
 	# mysqldumpslow -s at -t 10 /var/log/mysql/mysql-slow.log
 
