@@ -94,4 +94,4 @@ push:
 	git add measure/ && git commit -m "log $(NOW)" && git push origin $(BRANCH)
 
 init_sql:
-	ssh $(SERVER1) 'mysql -h 127.0.0.1 -P 3306 -u isucon -pisucon -e "DROP DATABASE IF EXISTS isupipe; CREATE DATABASE isupipe;" && cat $(APP_HOME)/webapp/sql/initdb.d/10_schema.sql'
+	ssh $(SERVER1) 'mysql -h 127.0.0.1 -P 3306 -u isucon -pisucon -e "DROP DATABASE IF EXISTS isupipe; CREATE DATABASE isupipe;" && cat $(APP_HOME)/sql/initdb.d/10_schema.sql'
