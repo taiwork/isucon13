@@ -95,3 +95,5 @@ push:
 
 init_sql:
 	ssh $(SERVER1) 'mysql -h 127.0.0.1 -P 3306 -u isucon -pisucon -e "DROP DATABASE IF EXISTS isupipe; CREATE DATABASE isupipe;" && cat $(APP_HOME)/sql/initdb.d/10_schema.sql | sudo mysql isupipe'
+	ssh $(SERVER2) 'mysql -h 127.0.0.1 -P 3306 -u isucon -pisucon -e "DROP DATABASE IF EXISTS isupipe; CREATE DATABASE isupipe;" && cat $(APP_HOME)/sql/initdb.d/10_schema.sql | sudo mysql isupipe'
+	ssh $(SERVER3) 'mysql -h 127.0.0.1 -P 3306 -u isucon -pisucon -e "DROP DATABASE IF EXISTS isupipe; CREATE DATABASE isupipe;" && cat $(APP_HOME)/sql/initdb.d/10_schema.sql | sudo mysql isupipe'
