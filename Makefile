@@ -13,7 +13,7 @@ SERVER3=isucon@54.250.164.198
 
 # alp
 ALPSORT=sum
-# ALPM="/api/isu/.+/icon,/api/isu/.+/graph,/api/isu/.+/condition,/api/isu/[-a-z0-9]+,/api/condition/[-a-z0-9]+,/api/catalog/.+,/api/condition\?,/isu/........-....-.+"
+ALPM="/api/user/.+/icon,/api/user/.+/theme,/api/user/.+/statistics,/api/livestream/\d+/livecomment,/api/livestream/\d+/ngwords,/api/livestream/\d+/exit,/api/livestream/\d+/enter,/api/livestream/\d+/livecomment/\d+/report,/api/livestream/\d+/reaction,/api/livestream/search?tag=.+
 OUTFORMAT=count,method,uri,min,max,sum,avg,p99
 
 NOW:=$(shell date "+%Y-%m-%d-%H:%M:%S")
@@ -78,7 +78,7 @@ restart:
 
 alp:
 	cd $(APP_HOME) && \
-	sudo /home/linuxbrew/.linuxbrew/bin/alp ltsv --file=$(NGINX_LOG) --nosave-pos --pos /tmp/alp.pos --sort $(ALPSORT) --reverse -o $(OUTFORMAT) -q > ./measure/alp/$(NOW).log
+	sudo /home/linuxbrew/.linuxbrew/bin/alp ltsv --file=$(NGINX_LOG) --nosave-pos --pos /tmp/alp.pos --sort $(ALPSORT) --reverse -o $(OUTFORMAT) -q -m $(ALPM) > ./measure/alp/$(NOW).log
 
 # mysql slow log
 # -s c はクエリの実行回数でソート
