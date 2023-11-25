@@ -1,0 +1,63 @@
+Count: 53550  Time=0.00s (179s)  Lock=0.00s (0s)  Rows=0.1 (5112), isudns[isudns]@localhost
+  SELECT content,ttl,prio,type,domain_id,disabled,name,auth FROM records WHERE disabled=N and name='S' and domain_id=N
+
+Count: 37114  Time=0.00s (115s)  Lock=0.00s (0s)  Rows=0.5 (18585), isudns[isudns]@localhost
+  SELECT content,ttl,prio,type,domain_id,disabled,name,auth FROM records WHERE disabled=N and type='S' and name='S'
+
+Count: 67092  Time=0.00s (29s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  select kind,content from domains, domainmetadata where domainmetadata.domain_id=domains.id and name='S'
+
+Count: 166800  Time=0.00s (26s)  Lock=0.00s (0s)  Rows=0.0 (0), 2users@localhost
+  #
+
+Count: 534  Time=0.01s (4s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  commit
+
+Count: 531  Time=0.01s (3s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  delete from records where domain_id=N and name='S' and type='S'
+
+Count: 1062  Time=0.00s (2s)  Lock=0.00s (0s)  Rows=0.5 (531), isudns[isudns]@localhost
+  SELECT content,ttl,prio,type,domain_id,disabled,name,auth FROM records WHERE disabled=N and type='S' and name='S' and domain_id=N
+
+Count: 4371  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  insert into records (content,ttl,prio,type,domain_id,disabled,name,ordername,auth) values ('S',N,N,'S',N,N,'S',NULL,N)
+
+Count: 1074  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED
+
+Count: 534  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (534), isudns[isudns]@localhost
+  select id,name,master,last_check,notified_serial,type,options,catalog,account from domains where name='S'
+
+Count: 3  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  delete from records where domain_id=N
+
+Count: 534  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+  begin
+
+Count: 12  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@localhost
+
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=6.0 (6), isucon[isucon]@localhost
+  show databases
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=12.0 (24), isucon[isucon]@localhost
+  show tables
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), isucon[isucon]@localhost
+  select * from users limit N
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), isucon[isucon]@localhost
+  select @@version_comment limit N
+
+Count: 3198  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Close stmt
+
+Count: 3210  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Prepare
+
+Count: 159559  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Reset stmt
+
+Count: 833  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Quit
+
