@@ -70,7 +70,7 @@ lotate_mysql_log:
 restart:
 	sudo systemctl restart nginx
 	sudo systemctl restart mysql
-	sudo systemctl restart isucondition.ruby.service
+	sudo systemctl restart $(SYSTEMCTL_APP)
 
 # bench
 # bench:
