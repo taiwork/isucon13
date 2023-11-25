@@ -55,8 +55,6 @@ build-mysql:
 .PHONY: measure lotate_log lotate_nginx_log lotate_mysql_log restart bench alp mysql_slow_log push
 measure:
 	ssh $(SERVER1) 'cd $(APP_HOME) && make alp mysql_slow_log lotate_log push restart'
-	ssh $(SERVER2) 'cd $(APP_HOME) && make alp mysql_slow_log lotate_log push restart'
-	ssh $(SERVER3) 'cd $(APP_HOME) && make alp mysql_slow_log lotate_log push restart'
 
 # log lotation
 # logファイルを変えたあとに、nginx, mysqlを再起動すること
