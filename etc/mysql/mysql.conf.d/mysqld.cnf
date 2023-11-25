@@ -62,9 +62,9 @@ myisam-recover-options  = BACKUP
 log_error = /var/log/mysql/error.log
 #
 # Here you can see queries with especially long duration
-slow_query_log = 1
-slow_query_log_file	= /var/log/mysql/mysql-slow.log
-long_query_time = 0
+# slow_query_log = 1
+# slow_query_log_file	= /var/log/mysql/mysql-slow.log
+# long_query_time = 0
 # log-queries-not-using-indexes
 #
 # The following can be used as easy to replay backup logs or for replication.
@@ -76,3 +76,9 @@ long_query_time = 0
 max_binlog_size   = 100M
 # binlog_do_db		= include_database_name
 # binlog_ignore_db	= include_database_name
+
+# binlogをオフ
+disable-log-bin=1
+# 各トランザクション後ではなく、1秒ごとにログをディスクにフラッシュします。
+# これにより、ディスクへの書き込み回数が減少し、トランザクション処理が高速化される可能性があります。
+innodb_flush_log_at_trx_commit = 2
