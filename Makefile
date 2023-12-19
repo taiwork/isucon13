@@ -7,9 +7,9 @@ NGINX_LOG=/var/log/nginx/access.log
 MYSQL_LOG=/var/log/mysql/mysql-slow.log
 
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
-SERVER1=isucon@18.177.103.234
-SERVER2=isucon@18.176.121.50
-SERVER3=isucon@54.250.164.198
+SERVER1=isucon@xx.xxx.xxx.xxx
+SERVER2=isucon@xx.xxx.xxx.xx
+SERVER3=isucon@xx.xxx.xxx.xxx
 
 # alp
 ALPSORT=sum
